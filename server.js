@@ -6,6 +6,8 @@ const morgan = require('morgan')
 var methodOverride = require('method-override')
 const connectDB = require('./config/db')
 
+const routes = require('./routes/index')
+
 //Load config
 dotenv.config({path: './config/config.env'})
 connectDB()
@@ -21,6 +23,11 @@ app.use(express.json())
 if (process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'))
 }
+
+//routes
+
+app.use(methodOverride('_method'))
+app.use('/', routes)
 
 const PORT = process.env.PORT || 3000
 
