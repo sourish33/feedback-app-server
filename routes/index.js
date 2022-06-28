@@ -18,11 +18,24 @@ router.post('/feedback', async (req, res)=>{
         return res.status(200).json(newFeedback)
         
     } catch (error) {
-        res.status(200).json({
+        res.status(404).json({
             status: "Fail",
             error
         })
         
+    }
+})
+
+//get all feedback
+router.get('/feedback', async (req, res) =>{
+    try {
+        const allFeedback = await Feedback.find().sort({createdAt: 1}).lean().exec()
+        return res.status(200).json(allFeedback)
+    } catch (error) {
+        res.status(404).json({
+            status: "Fail",
+            error
+        })
     }
 })
 
