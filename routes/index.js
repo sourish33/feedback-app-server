@@ -53,4 +53,18 @@ router.get('/feedback', async (req, res) =>{
     }
 })
 
+router.patch('/feedback/:id', async (req, res) =>{
+    try {
+        await Feedback.findOneAndUpdate({_id: req.params.id}, req.body)
+        return res.status(201).json({
+            status: "Success"
+        })
+    } catch (error) {
+        res.status(404).json({
+            status: "Fail",
+            error
+        })
+    }
+})
+
 module.exports = router
