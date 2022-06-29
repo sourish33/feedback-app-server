@@ -26,6 +26,19 @@ router.post('/feedback', async (req, res)=>{
     }
 })
 
+//get a feedback item
+router.get('/feedback/:id', async (req, res) =>{
+    try {
+        const feedbackItems = await Feedback.find({_id: req.params.id}).lean().exec()
+        return res.status(200).json({count: 1, feedbackItems})
+    } catch (error) {
+        res.status(404).json({
+            status: "Fail",
+            error
+        })
+    }
+})
+
 //get all feedback
 router.get('/feedback', async (req, res) =>{
     try {
