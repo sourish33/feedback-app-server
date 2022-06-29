@@ -67,4 +67,19 @@ router.patch('/feedback/:id', async (req, res) =>{
     }
 })
 
+router.delete('/feedback/:id', async (req, res) =>{
+    try {
+        const deleted = await Feedback.findOneAndDelete({_id: req.params.id})
+        console.log(deleted)
+        return res.status(204).json({
+            status: "Deleted successfully"
+        })
+    } catch (error) {
+        res.status(404).json({
+            status: "Fail",
+            error
+        })
+    }
+})
+
 module.exports = router
