@@ -55,7 +55,7 @@ router.get('/feedback', async (req, res) =>{
 
 router.patch('/feedback/:id', async (req, res) =>{
     try {
-        const updated = await Feedback.findOneAndUpdate({_id: req.params.id}, req.body)
+        const updated = await Feedback.findOneAndUpdate({_id: req.params.id}, req.body, {new:true})
         return res.status(201).json({
             status: "Success",
             updated
